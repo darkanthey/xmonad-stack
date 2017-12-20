@@ -1,0 +1,2 @@
+#!/bin/bash
+wine "C:\\Program Files\\Google\\Picasa3\\PicasaPhotoViewer.exe" "$1" 2> /dev/null

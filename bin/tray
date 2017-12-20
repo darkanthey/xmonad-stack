@@ -1,0 +1,11 @@
+#!/bin/bash
+# Script to launch trayer in the correct position next to xmobar.
+# Author: Vic Fryzel
+# http://github.com/vicfryzel/xmonad-config
+
+
+# This is setup to display on dual 1920x1080 monitors, with the right-side
+# monitor as primary.  Adjust margin as necessary for other resolutions/setups.
+
+# For second screen -i 12  12x1+3720, For first screen 6x1+1820
+stalonetray --kludges force_icons_size --icon-size 12 --window-type normal --geometry 6x1+3720 --window-strut none --background black --icon-gravity NE

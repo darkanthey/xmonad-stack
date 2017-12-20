@@ -1,0 +1,13 @@
+#!/bin/sh
+cd ~/.xmonad
+stack --verbose --stack-yaml stack.yaml ghc -- --make xmonad.hs -i -ilib -fllvm -threaded -fforce-recomp -main-is main -v0 -o xmonad-x86_64-linux
+
+XMONAD_PATH=~/.xmonad/.stack-work/install/x86_64-linux
+cd $XMONAD_PATH
+
+TAKE_FIRST_DIRNAME=$(ls -tr|awk 'NR==0; END{print}')
+
+ln -sf $XMONAD_PATH/$TAKE_FIRST_DIRNAME/8.2.2/bin/xmobar ~/.local/bin
+# ln -sf $XMONAD_PATH/$TAKE_FIRST_DIRNAME/8.2.2/bin/xmonad ~/.local/bin
+ln -sf ~/.xmonad/xmonad-x86_64-linux ~/.local/bin/xmonad
+ln -sf $XMONAD_PATH/$TAKE_FIRST_DIRNAME/8.2.2/bin/yeganesh ~/.local/bin

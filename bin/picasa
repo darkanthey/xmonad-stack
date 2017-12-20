@@ -1,0 +1,2 @@
+#!/bin/bash
+wine /home/darkanthey/.wine/dosdevices/c:/Program\ Files/Google/Picasa3/Picasa3.exe 2> /dev/null

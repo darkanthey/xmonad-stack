@@ -1,0 +1,35 @@
+#/bin/bash
+
+BACUP_PATH=/tmp/.home_backup/;
+rm -rf $BACUP_PATH;
+mkdir $BACUP_PATH;
+mkdir $BACUP_PATH/.xmonad/;
+mkdir $BACUP_PATH/.emacs.d/;
+mkdir $BACUP_PATH/.emacs.d/tmp/;
+
+cd ~
+
+# Store config
+tar -zcf $BACUP_PATH/.other_cfg.tar.gz .zshrc .Xdefaults .Xresources .asoundrc .authinfo .tmux.conf .globalrc .gitignore .gitcookies .gitconfig \
+.ssh/* .urxvt/* .config/mpv/mpv.conf .config/flake8 .config/pep8 .config/systemd;
+
+cp -R ~/.myemacs.d $BACUP_PATH/.myemacs.d;
+cd ~/.xmonad/;
+cp -R bin/ $BACUP_PATH/.xmonad/bin;
+cp -R README.markdown build stack.yaml xmobar.hs xmonad.hs $BACUP_PATH/.xmonad/;
+
+cd ~/.emacs.d/
+cp .ctagsignore .jshintrc .pylintrc $BACUP_PATH/.emacs.d/;
+
+cd $BACUP_PATH/.myemacs.d;
+find . -type f -name "starter-kit*.el" -exec rm -f {} \; && rm -f "$(whoami).el" && rm -rf ./elpa/*;
+cd $BACUP_PATH;
+
+# Store emacs config
+tar -zcf .myemacs.tar.gz .myemacs.d .emacs.d;
+
+# Store xmonad config
+tar -zcf .xmonad.tar.gz .xmonad;
+
+cp .myemacs.tar.gz .xmonad.tar.gz .other_cfg.tar.gz ~/Templates/Sync/;
+rm -rf $BACUP_PATH;

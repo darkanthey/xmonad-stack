@@ -1,0 +1,63 @@
+#!/bin/bash
+# Script to start common apps, and start xmonad.
+# Author: Andrew Grytsenko
+
+setxkbmap -model "kinesis" -layout "us,ru,us" -variant "dvp,"
+setxkbmap -option "grp:alt_shift_toggle,grp_led:scroll"
+
+# Configure PATH so that we can access our scripts below
+export PATH=$PATH:~/.local/bin:~/.xmonad/bin
+
+# Configure X
+xsetroot -cursor_name left_ptr &
+xrdb -merge ~/.Xdefaults &
+xcompmgr -a &
+
+#xrandr --fb 1920x1200
+xrandr --output DVI-0 --left-of HDMI-0 --primary
+
+# Start the system tray
+pgrep tray > /dev/null || tray &
+
+# Power saver
+pgrep xfce4-power-manager > /dev/null || xfce4-power-manager &>/dev/null &
+
+# start clipboard manager without icon
+pgrep parcellite > /dev/null || parcellite -n &>/dev/null &
+
+# Start two terminals
+pgrep urxvtd > /dev/null || urxvtd -f -q &
+urxvtc &
+urxvtc &
+
+# Start sound server
+pgrep pulseaudio > /dev/null || pulseaudio --start &>/dev/null &
+
+# Set background
+feh --image-bg black --bg-max '/home/darkanthey/Desktop/anonymous-mask-wallpaper.jpg' &
+
+# pgrep redshift > /dev/null || redshift -l 51.07:32.52 -t 5700:3600 -g 0.9 -m vidmode &>/dev/null &
+xautolock -locker "i3lock -c000000" -time 15 -corners 0-00 -killer "sudo pm-suspend" -killtime 30 &
+
+~/.dropbox-dist/dropboxd start &>/dev/null &
+yandex-disk start -d /home/darkanthey/Templates/Yandex &>/dev/null &
+pgrep remacs > /dev/null || remacs -q -l ~/.myemacs.d/init.el &>/dev/null &
+
+pgrep franz > /dev/null || franz &>/dev/null &
+
+# Start a browser
+google-chrome --disk-cache-dir=/tmp/chromecache --user-data-dir=/tmp/chromeuser --enable-native-gpu-memory-buffers --enable-features="CheckerImaging" &>/dev/null &
+
+# For magic trackpad
+# perl ~/Work/work_libs/xSwipe/xSwipe.pl &>/dev/null &
+
+# For rsync
+~/.bin/resilio-sync/rslsync --config ~/.bin/resilio-sync/sync.conf
+
+# Docker user 172.17.1.0/24 and aws for ssh use the same route
+sudo ip route add 172.17.1.151 dev enp3s0
+
+exec dbus-launch --sh-syntax --exit-with-session xmonad
+# exec dbus-launch --sh-syntax --exit-with-session
+# stack exec xmonad -- $@
+

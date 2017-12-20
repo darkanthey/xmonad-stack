@@ -1,0 +1,17 @@
+#/bin/bash
+
+echo "Remacs";
+cd ~/Documents/libs/remacs;
+git pull &&
+echo "Emacs";
+cd ~/Documents/libs/emacs;
+git pull &&
+echo "Xmonad";
+cd ~/.xmonad/xmonad
+git pull &&
+echo "Xmobar";
+cd ~/.xmonad/xmobar
+git pull &&
+echo "Xmonad-contrib";
+cd ~/.xmonad/xmonad-contrib
+git pull;

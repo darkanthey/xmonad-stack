@@ -1,0 +1,22 @@
+#!/bin/bash
+
+shopt -s dotglob
+
+chromedir="/tmp/chromeuser/"
+backdir="/home/darkanthey/.config/chrome_backup/"
+
+if [ ! -d "$backdir" ]; then
+  mkdir $backdir
+fi
+
+cd $backdir
+
+if [[ "$1" == "save" ]]; then
+    tar -zcf chrome_"$(date '+%F').tar.gz" -C $chromedir .
+elif [[ "$1" == "restore" ]]; then
+    rm -rf $chromedir/*
+    mkdir $chromedir
+    tar -zxf $(ls -tr | sort | awk 'NR==0; END{print}') -C $chromedir
+fi
+
+ls -dt $backdir* | sort -nr | tail -n +4 | xargs rm -rf
