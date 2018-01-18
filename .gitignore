@@ -1,5 +1,7 @@
 bin/ggtags_helper
+bin/git_libs
 xmonad-x86_64-linux
+.stack-work
 *.errors
 *.hi
 *.o
