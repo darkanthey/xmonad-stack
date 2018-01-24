@@ -1,0 +1,19 @@
+---
+arch: x86_64
+distro: fedora:latest
+base_config: |
+    RUN yum install -y \
+        perl \
+        make \
+        automake \
+        gcc \
+        llvm-3.9 \
+        curl \
+        libffi-devel \
+        libXpm-devel \
+        libXrandr-devel \
+        libXft-devel \
+        libXinerama-devel \
+        gmp-devel \
+        libxml2-devel
+

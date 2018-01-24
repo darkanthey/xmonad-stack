@@ -1,0 +1,7 @@
+FROM {{distro}}
+
+{{base_config}}
+
+ENV PATH "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+RUN curl -sSL https://get.haskellstack.org/ | sh && \
+    stack upgrade

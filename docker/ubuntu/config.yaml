@@ -1,0 +1,18 @@
+---
+arch: x86_64
+distro: ubuntu:xenial
+base_config: |
+    RUN apt-get update && apt-get install -y \
+        perl \
+        make \
+        automake \
+        gcc \
+        llvm-3.9 \
+        curl \        
+        libgmp-dev \
+        libffi-dev \
+        libxpm-dev \
+        libxrandr-dev \
+        libxft-dev \
+        libxml2-dev \
+        libxinerama-dev

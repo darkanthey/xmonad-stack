@@ -90,6 +90,9 @@ stack install yeganesh
 
 ./linker
 
+### Add PATH
+export PATH=$PATH:~/.local/bin:~/.xmonad/bin
+
 
 ## Dvorak Programmer Keyboard shortcuts 
 
