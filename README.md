@@ -33,7 +33,8 @@ For source code, or to contribute, see the
 * [scrot 0.8](http://freshmeat.net/projects/scrot/)
 
 
-# Installing requirements on with stack with llvm-3.9
+# Building Xmonad
+# Installing requirements on with stack and llvm-3.9
 ### Install stack
     curl -sSL https://get.haskellstack.org/ | sh
     stack upgrade
@@ -57,6 +58,37 @@ For source code, or to contribute, see the
 
     ln -s ~/.xmonad/bin/xsession ~/.xsession
     # Logout, login from slim/lightdm/xdm/kdm/gdm
+
+
+#### Dockerized development environment
+
+If you don't want to bother with the above setup you can use the provided docker environment.  Make sure you have [docker](https://www.docker.com/) 1.12+ and [docker-compose](https://github.c
+om/docker/compose) 1.8+ available.
+
+To spin up the environment run
+
+``` shell
+docker-compose up -d
+```
+
+First time you run this command docker will build the image.  After that any subsequent startups will happen in less than a second.
+
+The working directory with xmonad will be mounted under the same path in the container so editing the files on your host machine will automatically be reflected inside the container.   To bui
+ld xmonad use the steps from [Building Xmonad](#building-xmonad) prefixed with `docker-compose exec xmonad`, this will ensure the commands are executed inside the container.
+
+### Example
+docker run -v /home/darkanthey/.xmonad/:/home/xmonad_src/ -v /home/darkanthey/.local:/home/local/ -it --security-opt seccomp=unconfined xmonad-build /bin/bash
+
+cd /home/xmonad_src
+
+stack setup
+stack build
+stack install yeganesh
+
+./build
+# close-docker terminal
+
+./linker
 
 
 ## Dvorak Programmer Keyboard shortcuts 
@@ -110,6 +142,3 @@ Most of the xmobar configuration is in ~/.xmonad/xmobar.hs.
 All scripts are in ~/.xmonad/bin/. Scripts are provided to do things like
 take screenshots, start the system tray, start dmenu, or fix your multi-head
 layout after a fullscreen application may have turned off one of the screens.
-
-Colors set in the xmobar config and dmenu script are meant to coincide with the
-[IR_Black terminal and vim themes](http://blog.infinitered.com/entries/show/6).
