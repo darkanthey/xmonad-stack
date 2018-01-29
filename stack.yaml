@@ -14,6 +14,7 @@ extra-deps:
 - dbus-0.10.13
 - libxml-sax-0.7.5
 - yeganesh-2.5
+system-ghc: false
 packages:
 - xmobar/
 - xmonad/

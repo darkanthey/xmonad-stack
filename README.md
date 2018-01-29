@@ -33,65 +33,45 @@ For source code, or to contribute, see the
 * [scrot 0.8](http://freshmeat.net/projects/scrot/)
 
 
-# Building Xmonad
+# Basic Xmonad dependencies
+   sudo apt install stalonetray dmenu scrot rxvt-unicode xsel feh xfce4-notifyd xfce4-power-manager xautolock i3lock
+
+
+## Dockerized development environment
+
+If you don't want to bother with the above setup you can use the provided docker environment.  Make sure you have [docker](https://www.docker.com/) 1.12+.
+
+To spin up the environment run
+
+``` shell
+/bin/sh builder.sh
+```
+
+The working directory with xmonad will be mounted under the same path in the container so editing the files on your host machine will automatically be reflected inside the container.   To build xmonad use the steps from [Building Xmonad](#building-xmonad).
+
+
+# Install Xmonad developer dependencies. If you used the docker this step you can skip.
 # Installing requirements on with stack and llvm-3.9
-### Install stack
+### Install stack if you'll work with docker you can skip this step
     curl -sSL https://get.haskellstack.org/ | sh
     stack upgrade
     cd ~/.xmonad
     sudo apt install perl make automake gcc llvm-3.9
     sudo apt install libgmp-dev libffi-dev libxpm-dev libxrandr-dev libxft-dev libxml2-dev libxinerama-dev
-    sudo apt install stalonetray dmenu scrot rxvt-unicode xsel feh xfce4-notifyd xfce4-power-manager xautolock i3lock
 
+### Building Xmonad
     cargo install ripgrep
 
-    ;; git clone https://github.com/xmonad/xmonad.git
-    ;; git clone https://github.com/xmonad/xmonad-contrib.git
-    ;; git clone https://github.com/jaor/xmobar.git
     stack setup
     stack build
     stack install yeganesh
-    bash ./build
+    bash ./build.sh
 
 
 ## Starting xmonad from slim, lightdm, xdm, kdm, or gdm
 
     ln -s ~/.xmonad/bin/xsession ~/.xsession
     # Logout, login from slim/lightdm/xdm/kdm/gdm
-
-
-#### Dockerized development environment
-
-If you don't want to bother with the above setup you can use the provided docker environment.  Make sure you have [docker](https://www.docker.com/) 1.12+ and [docker-compose](https://github.c
-om/docker/compose) 1.8+ available.
-
-To spin up the environment run
-
-``` shell
-docker-compose up -d
-```
-
-First time you run this command docker will build the image.  After that any subsequent startups will happen in less than a second.
-
-The working directory with xmonad will be mounted under the same path in the container so editing the files on your host machine will automatically be reflected inside the container.   To bui
-ld xmonad use the steps from [Building Xmonad](#building-xmonad) prefixed with `docker-compose exec xmonad`, this will ensure the commands are executed inside the container.
-
-### Example
-docker run -v /home/darkanthey/.xmonad/:/home/xmonad_src/ -v /home/darkanthey/.local:/home/local/ -it --security-opt seccomp=unconfined xmonad-build /bin/bash
-
-cd /home/xmonad_src
-
-stack setup
-stack build
-stack install yeganesh
-
-./build
-# close-docker terminal
-
-./linker
-
-### Add PATH
-export PATH=$PATH:~/.local/bin:~/.xmonad/bin
 
 
 ## Dvorak Programmer Keyboard shortcuts 
