@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/bash
+
 stack build
 stack install yeganesh
 

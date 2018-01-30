@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/bash
+
 cd ~/.xmonad/
 
 docker build -f docker/ubuntu/Dockerfile -t xmonad-build .
@@ -6,6 +7,7 @@ docker run --rm -v  $(pwd):/home/apps/ -it xmonad-build
 
 XMONAD_BIN=~/.local/bin
 XMONAD_PATH=~/.xmonad/.stack-work/install/x86_64-linux
+
 cd $XMONAD_PATH
 
 TAKE_FIRST_DIRNAME=$(ls -tr|awk 'NR==0; END{print}')

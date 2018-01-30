@@ -1,4 +1,4 @@
-resolver: nightly-2018-01-21
+resolver: nightly-2018-01-29
 flags:
   xmonad:
     testing: false
