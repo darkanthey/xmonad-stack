@@ -14,4 +14,7 @@ cd ~/.xmonad/xmobar
 git pull &&
 echo "Xmonad-contrib";
 cd ~/.xmonad/xmonad-contrib
+git pull &&
+echo "Waymonad";
+cd ~/Documents/libs/waymonad;
 git pull;

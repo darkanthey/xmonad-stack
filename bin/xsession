@@ -19,16 +19,14 @@ xrandr --output DVI-0 --left-of HDMI-0 --primary
 # Start the system tray
 pgrep tray > /dev/null || tray &
 
+# Start termaninal daemon
+urxvtd -f -q &
+
 # Power saver
 pgrep xfce4-power-manager > /dev/null || xfce4-power-manager &>/dev/null &
 
 # start clipboard manager without icon
 pgrep parcellite > /dev/null || parcellite -n &>/dev/null &
-
-# Start two terminals
-pgrep urxvtd > /dev/null || urxvtd -f -q &
-urxvtc &
-urxvtc &
 
 # Start sound server
 pgrep pulseaudio > /dev/null || pulseaudio --start &>/dev/null &
@@ -47,6 +45,10 @@ pgrep franz > /dev/null || franz &>/dev/null &
 
 # Start a browser
 google-chrome --disk-cache-dir=/tmp/chromecache --user-data-dir=/tmp/chromeuser --enable-native-gpu-memory-buffers --enable-features="CheckerImaging" &>/dev/null &
+
+# Start two terminals
+urxvtc &
+urxvtc &
 
 # For magic trackpad
 # perl ~/Work/work_libs/xSwipe/xSwipe.pl &>/dev/null &

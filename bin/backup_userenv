@@ -15,8 +15,9 @@ tar -zcf $BACUP_PATH/.other_cfg.tar.gz .zshrc .Xdefaults .Xresources .asoundrc .
 
 cp -R ~/.myemacs.d $BACUP_PATH/.myemacs.d;
 cd ~/.xmonad/;
-cp -R bin/ $BACUP_PATH/.xmonad/bin;
-cp -R README.markdown build stack.yaml xmobar.hs xmonad.hs $BACUP_PATH/.xmonad/;
+cp -R . $BACUP_PATH/.xmonad/;
+cd $BACUP_PATH/.xmonad/;
+rm -rf xmonad.hi xmonad.o xmonad-x86_64-linux .stack-work .git
 
 cd ~/.emacs.d/
 cp .ctagsignore .jshintrc .pylintrc $BACUP_PATH/.emacs.d/;

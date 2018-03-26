@@ -7,7 +7,7 @@ base_config: |
         make \
         automake \
         gcc \
-        llvm-3.9 \
+        llvm-5.0 \
         curl \        
         libgmp-dev \
         libffi-dev \

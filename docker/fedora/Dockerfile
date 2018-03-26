@@ -5,7 +5,7 @@ RUN yum install -y \
     make \
     automake \
     gcc \
-    llvm-3.9 \
+    llvm-5.0 \
     curl \
     libffi-devel \
     libXpm-devel \
@@ -27,3 +27,4 @@ WORKDIR /home/apps
 USER apps
 
 ENTRYPOINT /bin/bash build.sh
+

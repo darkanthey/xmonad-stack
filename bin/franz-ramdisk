@@ -1,0 +1,22 @@
+#!/bin/bash
+
+shopt -s dotglob
+
+franzdir="/tmp/Franz/"
+backdir="/home/darkanthey/.config/franz_backup/"
+
+if [ ! -d "$backdir" ]; then
+  mkdir $backdir
+fi
+
+cd $backdir
+
+if [[ "$1" == "save" ]]; then
+    tar -zcf franz_"$(date '+%F').tar.gz" -C $franzdir .
+elif [[ "$1" == "restore" ]]; then
+    rm -rf $franzdir/*
+    mkdir $franzdir
+    tar -zxf $(ls -tr | sort | awk 'NR==0; END{print}') -C $franzdir
+fi
+
+ls -dt $backdir* | sort -nr | tail -n +4 | xargs rm -rf
