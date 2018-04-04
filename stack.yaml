@@ -1,4 +1,4 @@
-resolver: nightly-2018-03-26
+resolver: nightly-2018-04-04
 flags:
   xmonad:
     testing: false
@@ -11,7 +11,7 @@ flags:
     testing: false
     use_xft: true
 extra-deps:
-- dbus-0.10.13
+- dbus-1.0.1
 - libxml-sax-0.7.5
 - yeganesh-2.5
 system-ghc: false

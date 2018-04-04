@@ -2,7 +2,8 @@
 
 cd ~/.xmonad/
 
-docker/generate
+./docker/generate
+
 docker build -f docker/ubuntu/Dockerfile -t xmonad-build .
 docker run --rm -v $(pwd):/home/apps/ -it xmonad-build
 

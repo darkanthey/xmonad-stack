@@ -8,20 +8,20 @@ import re
 import yaml
 
 
-def multiple_replace(vars, text):
-    regex = re.compile("{{(" + "|".join(re.escape(k) for k in vars) + ")}}")
-
-    return regex.sub(lambda mo: vars.get(mo.group(1)), text)
+def multiple_replace(args, text):
+    regex = re.compile("{{(" + "|".join(re.escape(k) for k in args) + ")}}")
+    return regex.sub(lambda mo: args.get(mo.group(1)), text)
 
 
 def main():
+    os.chdir('docker')
     template = open('Dockerfile.in').read()
 
     for root, dirs, files in os.walk('.'):
         if 'config.yaml' in files:
-            vars = yaml.load(open(os.path.join(root, 'config.yaml')))
+            args = yaml.load(open(os.path.join(root, 'config.yaml')))
             with open(os.path.join(root, 'Dockerfile'), 'w') as fp:
-                print(multiple_replace(vars, template), file=fp)
+                print(multiple_replace(args, template), file=fp)
 
 
 if __name__ == '__main__':
